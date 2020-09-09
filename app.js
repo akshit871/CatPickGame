@@ -70,14 +70,17 @@ class Game {
 
                     console.log("inside for last exec");
                     const btn = document.getElementById('smt');
+                    let click_counter = 0;
                     btn.addEventListener('click', () => {
 
                         const tnode = document.createTextNode(`${this.result.toUpperCase()}`);
                         document.getElementById('res').appendChild(tnode);
-
-
+                        click_counter++;
+                        if (click_counter == 1) {
+                            btn.style.pointerEvents = 'none';
+                        }
                     })
-                    // btn.style.pointerEvents = 'none';
+
 
                     return;
                 }
