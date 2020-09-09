@@ -33,7 +33,7 @@ class Game {
 
                 tmp.push(cur_img_uid);
 
-
+                //result finder logic
                 if (this.counter % 4 == 0 && this.result === "win") {
                     this.result = "win";
                     let flag;
@@ -54,7 +54,7 @@ class Game {
                 }
 
 
-
+                //append new duplicate image
                 let img_new = document.createElement('img');
                 img_new.src = `./Cats_images/cat_${cur_img_uid}.png`;
                 img_new.setAttribute('uIndex', cur_img_uid);
@@ -69,17 +69,15 @@ class Game {
                     // console.log(this.result);
                     // break;
                     // return this.result;
-                    // img_new.onload(() => {
-                    //     window.alert(this.result.toUpperCase);
-                    // })
-                    if (img_new.complete) {
-                        alert(this.result);
-                    } else {
-                        img_new.addEventListener('load', () => { alert("no image formed") })
-                        img_new.addEventListener('error', function () {
-                            alert('error')
-                        })
-                    }
+                    img_new.addEventListener('load', () => { alert("no image formed") })
+                    // if (img_new.complete) {
+                    //     alert(this.result);
+                    // } else {
+                    //     img_new.addEventListener('load', () => { alert("no image formed") })
+                    //     img_new.addEventListener('error', function () {
+                    //         alert('error')
+                    //     })
+                    // }
                     // cb(this.result);
                 }
 
@@ -89,6 +87,19 @@ class Game {
         })
     }
 
+    test_singleimgFire() {
+        return new Promise((resolve, reject) => {
+
+
+            const img = this.imgSet[11];
+            img.addEventListener('click', () => {
+                const img_new = document.createElement('img');
+                img_new.src = './Cats_images/cat_12.png';
+                document.querySelector(`.c10`).appendChild(img_new);
+                resolve("alert fired after adding event listner");
+            })
+        })
+    }
 
 };
 
@@ -97,5 +108,9 @@ const catArray = [...imgSet];
 
 const obj = new Game(1, imgSet, catArray);
 obj.setIndexImagesCat();
-obj.playGame();
+// obj.playGame();
+obj.test_singleimgFire()
+    .then((msg) => {
+        alert(msg);
+    })
 
