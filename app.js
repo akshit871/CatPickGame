@@ -24,7 +24,7 @@ class Game {
         })
     }
 
-    playGame(cb) {
+    playGame() {
         let tmp = [];
         this.imgSet.forEach((img, index) => {
 
@@ -66,10 +66,21 @@ class Game {
                 if (this.counter == 13) {
                     // document.querySelector('.c12').addEventListener()
                     // window.alert(this.result.toUpperCase());
-                    console.log(this.result);
+                    // console.log(this.result);
                     // break;
                     // return this.result;
-                    cb(this.result);
+                    // img_new.onload(() => {
+                    //     window.alert(this.result.toUpperCase);
+                    // })
+                    if (img_new.complete) {
+                        alert(this.result);
+                    } else {
+                        img_new.addEventListener('load', () => { alert("no image formed") })
+                        img_new.addEventListener('error', function () {
+                            alert('error')
+                        })
+                    }
+                    // cb(this.result);
                 }
 
 
@@ -86,7 +97,5 @@ const catArray = [...imgSet];
 
 const obj = new Game(1, imgSet, catArray);
 obj.setIndexImagesCat();
-obj.playGame((res) => {
-    window.alert(res);
-});
+obj.playGame();
 
