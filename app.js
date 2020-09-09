@@ -1,16 +1,16 @@
 // document.querySelector('.cat-table').firstElementChild.firstElementChild.firstElementChild.firstChild
 class Game {
 
-    constructor(counter, imgSet, catArray) {
+    constructor(counter, imgSet) {
         this.counter = counter;
         this.imgSet = imgSet;
-        this.catArray = catArray;
         this.result = "win";
 
     }
 
     setIndexImagesCat() {
-        this.catArray.forEach((img, index) => {
+        let catArray = [...this.imgSet];
+        imgSet.forEach((img, index) => {
             img.setAttribute('uIndex', index + 1);
         })
     }
@@ -35,22 +35,18 @@ class Game {
 
 
                 if (this.counter % 4 == 0 && this.result === "win") {
-                    this.result = "win";
-                    let flag;
-                    console.log(tmp);
-                    tmp.forEach((uid) => {
-                        if (flag == null) {
-                            flag = uid;
-                        }
-                        else {
-                            if (flag == uid) {
-                                this.result = "loose";
-                            } else {
-                                flag = uid;
-                            }
-                        }
-                    })
+                    let set1 = new Set();
+                    tmp.forEach(element => {
+                        set1.add(element);
+                    });
+                    if (set1.size == tmp.length) {
+                        this.result = 'win';
+                    }
+                    else {
+                        this.result = 'lost';
+                    }
                     tmp = [];
+                    set1.clear();
                 }
 
 
@@ -68,25 +64,15 @@ class Game {
                         img.style.pointerEvents = 'none';
                     })
 
-                    console.log("inside for last exec");
                     const btn = document.getElementById('smt');
-                    let click_counter = 0;
                     btn.addEventListener('click', () => {
 
                         const tnode = document.createTextNode(`${this.result.toUpperCase()}`);
                         document.getElementById('res').appendChild(tnode);
-                        click_counter++;
-                        if (click_counter == 1) {
-                            btn.style.pointerEvents = 'none';
-                        }
+                        btn.style.pointerEvents = 'none';
                     })
-
-
                     return;
                 }
-
-
-
             })
         })
     }
@@ -96,8 +82,7 @@ class Game {
 };
 
 const imgSet = document.querySelectorAll('img');
-const catArray = [...imgSet];
-const obj = new Game(1, imgSet, catArray);
+const obj = new Game(1, imgSet);
 obj.setIndexImagesCat();
 obj.playGame();
 
