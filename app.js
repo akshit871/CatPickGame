@@ -63,24 +63,23 @@ class Game {
                 )
 
                 this.counter++;
-                if (this.counter == 13) {
-                    // document.querySelector('.c12').addEventListener()
-                    // window.alert(this.result.toUpperCase());
-                    // console.log(this.result);
-                    // break;
-                    // return this.result;
-                    // img_new.onload(() => {
-                    //     window.alert(this.result.toUpperCase);
-                    // })
-                    if (img_new.complete) {
-                        alert(this.result);
-                    } else {
-                        img_new.addEventListener('load', () => { alert("no image formed") })
-                        img_new.addEventListener('error', function () {
-                            alert('error')
-                        })
-                    }
-                    // cb(this.result);
+                if (this.counter === 13) {
+                    imgSet.forEach((img) => {
+                        img.style.pointerEvents = 'none';
+                    })
+
+                    console.log("inside for last exec");
+                    const btn = document.getElementById('smt');
+                    btn.addEventListener('click', () => {
+                        
+                        const tnode = document.createTextNode(`${this.result.toUpperCase()}`);
+                        document.getElementById('res').appendChild(tnode);
+                        
+
+                    })
+                    btn.style.pointerEvents = 'none';
+
+                    return;
                 }
 
 
@@ -90,12 +89,17 @@ class Game {
     }
 
 
+
 };
 
 const imgSet = document.querySelectorAll('img');
 const catArray = [...imgSet];
-
 const obj = new Game(1, imgSet, catArray);
 obj.setIndexImagesCat();
 obj.playGame();
+
+
+
+
+
 
