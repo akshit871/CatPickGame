@@ -25,6 +25,8 @@ class Game {
     }
 
     playGame() {
+
+
         let tmp = [];
         this.imgSet.forEach((img, index) => {
 
@@ -35,52 +37,34 @@ class Game {
 
                 //result finder logic
                 if (this.counter % 4 == 0 && this.result === "win") {
-                    this.result = "win";
-                    let flag;
-                    console.log(tmp);
-                    tmp.forEach((uid) => {
-                        if (flag == null) {
-                            flag = uid;
-                        }
-                        else {
-                            if (flag == uid) {
-                                this.result = "loose";
-                            } else {
-                                flag = uid;
-                            }
-                        }
-                    })
+                    let set1 = new Set();
+                    tmp.forEach(element => {
+                        set1.add(element);
+                    });
+                    if (set1.size == tmp.length) {
+                        this.result = 'win';
+                    }
+                    else {
+                        this.result = 'lost';
+                    }
                     tmp = [];
+                    set1.clear();
                 }
 
 
                 //append new duplicate image
                 let img_new = document.createElement('img');
                 img_new.src = `./Cats_images/cat_${cur_img_uid}.png`;
-                img_new.setAttribute('uIndex', cur_img_uid);
                 document.querySelector(`.c${this.counter}`).appendChild(
                     img_new
                 )
 
                 this.counter++;
                 if (this.counter == 13) {
-                    // document.querySelector('.c12').addEventListener()
-                    // window.alert(this.result.toUpperCase());
-                    // console.log(this.result);
-                    // break;
-                    // return this.result;
-                    img_new.addEventListener('load', () => { alert("no image formed") })
-                    // if (img_new.complete) {
-                    //     alert(this.result);
-                    // } else {
-                    //     img_new.addEventListener('load', () => { alert("no image formed") })
-                    //     img_new.addEventListener('error', function () {
-                    //         alert('error')
-                    //     })
-                    // }
-                    // cb(this.result);
-                }
 
+                    img_new.addEventListener('load', () => { alert(this.result.toUpperCase()) });
+
+                }
 
 
             })
@@ -108,9 +92,6 @@ const catArray = [...imgSet];
 
 const obj = new Game(1, imgSet, catArray);
 obj.setIndexImagesCat();
-// obj.playGame();
-obj.test_singleimgFire()
-    .then((msg) => {
-        alert(msg);
-    })
+obj.playGame();
+
 
