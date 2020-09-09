@@ -71,13 +71,13 @@ class Game {
                     console.log("inside for last exec");
                     const btn = document.getElementById('smt');
                     btn.addEventListener('click', () => {
-                        
+
                         const tnode = document.createTextNode(`${this.result.toUpperCase()}`);
                         document.getElementById('res').appendChild(tnode);
-                        
+
 
                     })
-                    btn.style.pointerEvents = 'none';
+                    // btn.style.pointerEvents = 'none';
 
                     return;
                 }
