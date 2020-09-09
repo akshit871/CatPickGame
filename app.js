@@ -1,7 +1,7 @@
 // document.querySelector('.cat-table').firstElementChild.firstElementChild.firstElementChild.firstChild
-class Cat {
+class Game {
 
-    constructor(counter, imgSet, catArray) {
+    constructor(counter, imgSet, GameArray) {
         this.counter = counter;
         this.imgSet = imgSet;
         this.catArray = catArray;
@@ -24,7 +24,7 @@ class Cat {
         })
     }
 
-    playGame() {
+    playGame(cb) {
         let tmp = [];
         this.imgSet.forEach((img, index) => {
 
@@ -50,8 +50,6 @@ class Cat {
                             }
                         }
                     })
-
-                    // result = "win";
                     tmp = [];
                 }
 
@@ -63,11 +61,15 @@ class Cat {
                 document.querySelector(`.c${this.counter}`).appendChild(
                     img_new
                 )
+
                 this.counter++;
                 if (this.counter == 13) {
                     // document.querySelector('.c12').addEventListener()
+                    // window.alert(this.result.toUpperCase());
                     console.log(this.result);
-                    return;
+                    // break;
+                    // return this.result;
+                    cb(this.result);
                 }
 
 
@@ -82,6 +84,9 @@ class Cat {
 const imgSet = document.querySelectorAll('img');
 const catArray = [...imgSet];
 
-const cat_obj = new Cat(1, imgSet, catArray);
-cat_obj.setIndexImagesCat();
-cat_obj.playGame();
+const obj = new Game(1, imgSet, catArray);
+obj.setIndexImagesCat();
+obj.playGame((res) => {
+    window.alert(res);
+});
+
