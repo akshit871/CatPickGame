@@ -1,7 +1,7 @@
 // document.querySelector('.cat-table').firstElementChild.firstElementChild.firstElementChild.firstChild
 class Game {
 
-    constructor(counter, imgSet, GameArray) {
+    constructor(counter, imgSet, catArray) {
         this.counter = counter;
         this.imgSet = imgSet;
         this.catArray = catArray;
